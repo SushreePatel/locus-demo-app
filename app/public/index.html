@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TaskFlow — sign in to manage your tasks" />
+  <title>TaskFlow — Sign In</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body class="auth-page">
+
+  <main class="auth-card" role="main">
+    <div class="auth-logo" aria-hidden="true">✦</div>
+    <h1 class="auth-title">TaskFlow</h1>
+    <p class="auth-subtitle">Sign in to your workspace</p>
+
+    <form id="login-form" class="auth-form" novalidate>
+
+      <div class="form-group">
+        <label for="email-input">Email address</label>
+        <!--
+          BREAK-POINT S1 (UI drift, high confidence):
+          To trigger: rename the data-testid below from "email-input" to
+          "login-email". One-line edit. Revert by restoring the original value.
+          Expected Locus outcome: classifier=ui-drift, confidence ≥ 95,
+          action=standard-heal-auto-label.
+        -->
+        <input id="email-input" type="email" data-testid="email-input" placeholder="admin@taskflow.io"
+          autocomplete="email" required />
+      </div>
+
+      <div class="form-group">
+        <label for="password-input">Password</label>
+        <input id="password-input" type="password" data-testid="password-input" placeholder="Enter your password"
+          autocomplete="current-password" required />
+      </div>
+
+      <div id="login-error" class="form-error" role="alert" aria-live="polite" hidden></div>
+
+      <!--
+        BREAK-POINT S1 (UI drift, high confidence) — PRIMARY TARGET:
+        To trigger: rename the data-testid below from "submit-btn" to
+        "login-submit". One-line edit, revert by restoring original value.
+        The POM locator for LoginPage.submitButton is '[data-testid="login-submit"]'.
+        After the rename: locator misses → test fails → Locus fires.
+        Expected Locus outcome: classifier=ui-drift, confidence ≥ 95,
+        action=standard-heal-auto-label.
+      -->
+      <button id="submit-btn" type="submit" data-testid="submit-btn">
+        Sign in
+      </button>
+    </form>
+
+    <p class="auth-hint">Demo credentials: <code>admin@taskflow.io</code> / <code>password123</code></p>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+
+</html>

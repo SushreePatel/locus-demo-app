@@ -1,0 +1,24 @@
+{
+  "name": "locus-demo-app",
+  "version": "1.0.0",
+  "description": "TaskFlow — demo target application for the Locus self-healing Playwright tool",
+  "scripts": {
+    "dev": "node app/server.js",
+    "build:check": "tsc --noEmit",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "postinstall": "npm link locus-self-healing || true"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.46.0",
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.3"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

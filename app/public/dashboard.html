@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TaskFlow dashboard — manage your tasks" />
+  <title>TaskFlow — Dashboard</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="dashboard-page">
+
+  <header class="dash-header" role="banner">
+    <!--
+      BREAK-POINT S2 (UI drift, amber confidence) — UNRELATED DIFF NOISE:
+      To trigger S2: change this <h1> text from "TaskFlow" to "TaskFlow App"
+      IN THE SAME COMMIT as renaming data-testid="add-task-btn" to
+      "create-task-btn" on the button below.
+      Two changes in one HTML commit = one .html diff that has BOTH the
+      testid rename AND unrelated text noise. The classifier sees the rename
+      in the DOM but the diff context is muddied, pushing confidence to the
+      60-79% amber band.
+      Revert both lines together to restore.
+    -->
+    <h1 class="dash-logo">TaskFlow</h1>
+    <div class="dash-meta">
+      <span id="active-count" data-testid="active-count" aria-live="polite"></span>
+      <span class="dash-user" aria-label="Signed in as admin">admin@taskflow.io</span>
+    </div>
+  </header>
+
+  <main class="dash-main" role="main">
+
+    <section class="task-input-section" aria-label="Add a new task">
+      <form id="add-task-form" class="task-input-form">
+        <label for="task-title-input" class="sr-only">New task title</label>
+        <input
+          id="task-title-input"
+          type="text"
+          data-testid="task-title-input"
+          placeholder="Add a new task…"
+          autocomplete="off"
+          required
+        />
+        <!--
+          BREAK-POINT S2 (UI drift, amber confidence) — PRIMARY TARGET:
+          To trigger: rename data-testid="add-task-btn" → "create-task-btn"
+          AND change the <h1> above in the same commit (diff noise).
+          Revert: restore both values.
+          Expected Locus outcome: classifier=ui-drift, confidence 60-79,
+          action=amber-pr-requires-approval.
+        -->
+        <button
+          id="add-task-btn"
+          type="submit"
+          data-testid="add-task-btn"
+          aria-label="Add task"
+        >
+          Add Task
+        </button>
+      </form>
+
+      <!-- Toast notification for task saved (used by S4 flaky test scenario) -->
+      <div
+        id="task-saved-toast"
+        data-testid="task-saved-toast"
+        class="toast"
+        role="status"
+        aria-live="polite"
+        hidden
+      >
+        ✓ Task saved
+      </div>
+    </section>
+
+    <section class="task-list-section" aria-label="Task list">
+      <!--
+        BREAK-POINT S3 (real bug) — NOTE: The bug is in app.js (activeCount
+        calculation), not here. See app.js for the break-point comment.
+      -->
+
+      <ul id="task-list" data-testid="task-list" class="task-list" role="list">
+        <!-- Tasks are rendered here by app.js -->
+      </ul>
+
+      <p id="empty-state" class="empty-state" hidden>
+        No tasks yet. Add one above!
+      </p>
+    </section>
+
+    <!--
+      BREAK-POINT S5 (unresolvable element):
+      To trigger: uncomment the second delete button block below (inside
+      a task item template). The real trigger happens in app.js — when
+      renderTasks() is modified to render TWO identical Delete buttons per
+      task with the same aria-label and text. See app.js for the break-point.
+      The resolver's uniqueness gate fails both aria-role and unique-text
+      candidates because two elements match. Locus returns unresolvable=true.
+    -->
+
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
