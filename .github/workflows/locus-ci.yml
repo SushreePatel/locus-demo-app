@@ -34,8 +34,8 @@ env:
   GITHUB_PR_NUMBER:  ${{ github.event.pull_request.number }}
 
   # Locus model config — set as repository Variables (not Secrets)
-  CLASSIFIER_MODEL: ${{ vars.CLASSIFIER_MODEL || 'gemini-3.1-flash-lite' }}
-  RESOLVER_MODEL:   ${{ vars.RESOLVER_MODEL   || 'gemini-3.1-pro' }}
+  CLASSIFIER_MODEL: ${{ vars.CLASSIFIER_MODEL || 'gemini-2.5-flash-lite' }}
+  RESOLVER_MODEL:   ${{ vars.RESOLVER_MODEL   || 'gemini-2.5-flash' }}
   HEAL_BUDGET:      ${{ vars.HEAL_BUDGET      || '3' }}
   FIRESTORE_DATABASE_ID: ${{ vars.FIRESTORE_DATABASE_ID || '(default)' }}
 
@@ -83,22 +83,6 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
-      - name: Checkout locus-self-healing package
-        uses: actions/checkout@v4
-        with:
-          repository: SushreePatel/locus-self-healing
-          path: locus-self-healing-pkg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and link locus-self-healing
-        run: |
-          cd locus-self-healing-pkg
-          npm ci
-          npm run build
-          npm link
-          cd ..
-          npm link locus-self-healing
-
       - name: Install dependencies
         run: npm ci
 
@@ -129,22 +113,6 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-
-      - name: Checkout locus-self-healing package
-        uses: actions/checkout@v4
-        with:
-          repository: SushreePatel/locus-self-healing
-          path: locus-self-healing-pkg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and link locus-self-healing
-        run: |
-          cd locus-self-healing-pkg
-          npm ci
-          npm run build
-          npm link
-          cd ..
-          npm link locus-self-healing
 
       - name: Install dependencies
         run: npm ci
@@ -221,12 +189,7 @@ jobs:
           if [ "$WEBHOOK_SUCCESS" = "false" ]; then
             echo "[Locus/CI] All retries exhausted — writing to Firestore webhook-failures"
             node -e "
-              let Firestore;
-              try {
-                Firestore = require('@google-cloud/firestore').Firestore;
-              } catch (e) {
-                Firestore = require('locus-self-healing/node_modules/@google-cloud/firestore').Firestore;
-              }
+              const { Firestore } = require('@google-cloud/firestore');
               const db = new Firestore({
                 projectId: process.env.GCP_PROJECT_ID,
                 databaseId: process.env.FIRESTORE_DATABASE_ID || '(default)',
@@ -280,22 +243,6 @@ jobs:
         with:
           node-version: '22'
           cache: 'npm'
-
-      - name: Checkout locus-self-healing package
-        uses: actions/checkout@v4
-        with:
-          repository: SushreePatel/locus-self-healing
-          path: locus-self-healing-pkg
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Build and link locus-self-healing
-        run: |
-          cd locus-self-healing-pkg
-          npm ci
-          npm run build
-          npm link
-          cd ..
-          npm link locus-self-healing
 
       - name: Install dependencies
         run: npm ci
