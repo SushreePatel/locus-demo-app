@@ -25,7 +25,7 @@ on:
     types: [locus-post-merge]
 
 env:
-  GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
+  GCP_PROJECT_ID: ${{ vars.GCP_PROJECT_ID || 'locus-dev-506512' }}
   GCP_REGION:     ${{ vars.GCP_REGION || 'us-central1' }}
 
   # GitHub context — set automatically by Actions
@@ -36,7 +36,7 @@ env:
   # Locus model config — set as repository Variables (not Secrets)
   CLASSIFIER_MODEL: ${{ vars.CLASSIFIER_MODEL || 'gemini-2.5-flash-lite' }}
   RESOLVER_MODEL:   ${{ vars.RESOLVER_MODEL   || 'gemini-2.5-flash' }}
-  HEAL_BUDGET:      ${{ vars.HEAL_BUDGET      || '3' }}
+  HEAL_BUDGET:      ${{ vars.HEAL_BUDGET      || '10' }}
   FIRESTORE_DATABASE_ID: ${{ vars.FIRESTORE_DATABASE_ID || '(default)' }}
 
   # POM discovery — must match where this repo's POMs actually live
