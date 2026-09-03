@@ -83,8 +83,25 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Checkout locus-self-healing package
+        uses: actions/checkout@v4
+        with:
+          repository: SushreePatel/locus-self-healing
+          path: locus-self-healing-pkg
+          token: ${{ secrets.PAT_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Build and link locus-self-healing
+        run: |
+          cd locus-self-healing-pkg
+          npm ci
+          npm run build
+          npm link
+          cd ..
+
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm link locus-self-healing
 
       - name: TypeScript build check
         run: npm run build:check
@@ -107,6 +124,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -114,8 +133,25 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Checkout locus-self-healing package
+        uses: actions/checkout@v4
+        with:
+          repository: SushreePatel/locus-self-healing
+          path: locus-self-healing-pkg
+          token: ${{ secrets.PAT_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Build and link locus-self-healing
+        run: |
+          cd locus-self-healing-pkg
+          npm ci
+          npm run build
+          npm link
+          cd ..
+
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm link locus-self-healing
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
@@ -237,6 +273,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -244,8 +282,25 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Checkout locus-self-healing package
+        uses: actions/checkout@v4
+        with:
+          repository: SushreePatel/locus-self-healing
+          path: locus-self-healing-pkg
+          token: ${{ secrets.PAT_TOKEN || secrets.GH_PAT || secrets.GITHUB_TOKEN }}
+
+      - name: Build and link locus-self-healing
+        run: |
+          cd locus-self-healing-pkg
+          npm ci
+          npm run build
+          npm link
+          cd ..
+
       - name: Install dependencies
-        run: npm ci
+        run: |
+          npm ci
+          npm link locus-self-healing
 
       - name: Install Playwright browsers
         run: npx playwright install --with-deps chromium
