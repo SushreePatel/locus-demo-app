@@ -80,10 +80,10 @@ export class LoginPage {
   // value to locusAttach() without hardcoding strings in two places.
 
   get submitButtonLocator(): string {
-    return "[data-testid=\"login-submit\"]";
+    return "[data-testid='login-submit']";
   }
 
   get emailInputLocator(): string {
-    return '[data-testid="input-email"]';
+    return "[data-testid='email-input']";
   }
 }
