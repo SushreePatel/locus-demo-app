@@ -39,7 +39,7 @@ export class LoginPage {
   readonly errorMessage: Locator;
 
   constructor(private readonly page: Page) {
-    this.emailInput = this.page.locator('[data-testid="email-input"]');
+    this.emailInput = this.page.locator('[data-testid="input-email"]');
     this.passwordInput = this.page.locator('[data-testid="password-input"]');
     this.submitButton = this.page.locator("[data-testid=\"login-submit\"]");
     this.errorMessage = this.page.locator('[id="login-error"]');
@@ -84,6 +84,6 @@ export class LoginPage {
   }
 
   get emailInputLocator(): string {
-    return '[data-testid="email-input"]';
+    return '[data-testid="input-email"]';
   }
 }
