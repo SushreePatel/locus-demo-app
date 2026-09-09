@@ -39,10 +39,10 @@ export class LoginPage {
   readonly errorMessage: Locator;
 
   constructor(private readonly page: Page) {
-    this.emailInput = this.page.locator('[data-testid="input-email"]');
-    this.passwordInput = this.page.locator('[data-testid="password-input"]');
-    this.submitButton = this.page.locator("[data-testid=\"login-submit\"]");
-    this.errorMessage = this.page.locator('[id="login-error"]');
+    this.emailInput = this.page.locator("[data-testid='email-input']");
+    this.passwordInput = this.page.locator("[data-testid='password-input']");
+    this.submitButton = this.page.locator("[data-testid='submit-btn']");
+    this.errorMessage = this.page.locator("[id='login-error']");
   }
 
   // ── Navigation ───────────────────────────────────────────────────────────
