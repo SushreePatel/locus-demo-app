@@ -40,7 +40,7 @@ export class LoginPage {
 
   constructor(private readonly page: Page) {
     this.emailInput = this.page.locator("[data-testid='login-email']");
-    this.passwordInput = this.page.locator("[data-testid='password-input']");
+    this.passwordInput = this.page.locator("[data-testid='login-password']");
     this.submitButton = this.page.locator("[data-testid='login-submit']");
     this.errorMessage = this.page.locator("[id='login-error']");
   }
