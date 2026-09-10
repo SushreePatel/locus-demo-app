@@ -41,7 +41,7 @@ export class LoginPage {
   constructor(private readonly page: Page) {
     this.emailInput = this.page.locator("[data-testid='user-email']");
     this.passwordInput = this.page.locator("[data-testid='login-password']");
-    this.submitButton = this.page.locator("[data-testid='signin-btn']");
+    this.submitButton = this.page.locator("[data-testid='login-submit']");
     this.errorMessage = this.page.locator("[id='login-error']");
   }
 
@@ -80,7 +80,7 @@ export class LoginPage {
   // value to locusAttach() without hardcoding strings in two places.
 
   get submitButtonLocator(): string {
-    return '[data-testid="signin-btn"]';
+    return '[data-testid="login-submit"]';
   }
 
   get emailInputLocator(): string {
