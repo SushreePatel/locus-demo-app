@@ -58,13 +58,13 @@ export class DashboardPage {
   readonly emptyState: Locator;
 
   constructor(private readonly page: Page) {
-    this.taskTitleInput  = this.page.locator('[data-testid="task-title-input"]');
-    this.addTaskButton   = this.page.locator('[data-testid="add-task-btn"]');
-    this.activeCount     = this.page.locator('[data-testid="active-count"]');
-    this.taskSavedToast  = this.page.locator('[data-testid="task-saved-toast"]');
-    this.deleteButton    = this.page.locator('[aria-label="Delete task"]').first();
-    this.taskList        = this.page.locator('[data-testid="task-list"]');
-    this.emptyState      = this.page.locator('[id="empty-state"]');
+    this.taskTitleInput = this.page.locator('[data-testid="task-title-input"]');
+    this.addTaskButton = this.page.locator('[data-testid="add-task-btn"]');
+    this.activeCount = this.page.locator('[data-testid="active-count"]');
+    this.taskSavedToast = this.page.locator('[data-testid="task-saved-toast"]');
+    this.deleteButton = this.page.locator('.task-item').first().locator('[aria-label="Delete task"]');
+    this.taskList = this.page.locator('[data-testid="task-list"]');
+    this.emptyState = this.page.locator('[id="empty-state"]');
   }
 
   // ── Navigation ───────────────────────────────────────────────────────────

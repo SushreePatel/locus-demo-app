@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,6 +8,7 @@
   <title>TaskFlow — Dashboard</title>
   <link rel="stylesheet" href="style.css" />
 </head>
+
 <body class="dashboard-page">
 
   <header class="dash-header" role="banner">
@@ -33,14 +35,8 @@
     <section class="task-input-section" aria-label="Add a new task">
       <form id="add-task-form" class="task-input-form">
         <label for="task-title-input" class="sr-only">New task title</label>
-        <input
-          id="task-title-input"
-          type="text"
-          data-testid="task-title-input"
-          placeholder="Add a new task…"
-          autocomplete="off"
-          required
-        />
+        <input id="task-title-input" type="text" data-testid="task-title-input" placeholder="Add a new task…"
+          autocomplete="off" required />
         <!--
           BREAK-POINT S2 (UI drift, amber confidence) — PRIMARY TARGET:
           To trigger: rename data-testid="add-task-btn" → "create-task-btn"
@@ -49,25 +45,13 @@
           Expected Locus outcome: classifier=ui-drift, confidence 60-79,
           action=amber-pr-requires-approval.
         -->
-        <button
-          id="add-task-btn"
-          type="submit"
-          data-testid="add-task-btn"
-          aria-label="Add task"
-        >
+        <button id="add-task-btn" type="submit" data-testid="add-task-btn" aria-label="Add task">
           Add Task
         </button>
       </form>
 
       <!-- Toast notification for task saved (used by S4 flaky test scenario) -->
-      <div
-        id="task-saved-toast"
-        data-testid="task-saved-toast"
-        class="toast"
-        role="status"
-        aria-live="polite"
-        hidden
-      >
+      <div id="task-saved-toast" data-testid="task-saved-toast" class="toast" role="status" aria-live="polite" hidden>
         ✓ Task saved
       </div>
     </section>
@@ -101,4 +85,5 @@
 
   <script src="app.js"></script>
 </body>
+
 </html>
