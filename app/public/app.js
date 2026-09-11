@@ -25,9 +25,9 @@
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const email    = document.getElementById('email-input').value;
-    const password = document.getElementById('password-input').value;
-    const errorEl  = document.getElementById('login-error');
+    const email = document.getElementById('login-email').value;
+    const password = document.getElementById('login-password').value;
+    const errorEl = document.getElementById('login-error');
 
     errorEl.hidden = true;
 
@@ -58,14 +58,14 @@
 // ============================================================
 
 (function initDashboard() {
-  const taskList   = document.getElementById('task-list');
+  const taskList = document.getElementById('task-list');
   if (!taskList) return; // only active on dashboard.html
 
   const activeCountEl = document.getElementById('active-count');
-  const emptyStateEl  = document.getElementById('empty-state');
-  const addForm       = document.getElementById('add-task-form');
-  const titleInput    = document.getElementById('task-title-input');
-  const toast         = document.getElementById('task-saved-toast');
+  const emptyStateEl = document.getElementById('empty-state');
+  const addForm = document.getElementById('add-task-form');
+  const titleInput = document.getElementById('task-title-input');
+  const toast = document.getElementById('task-saved-toast');
 
   // ── Active task counter ──────────────────────────────────────────────────
   function updateActiveCount(tasks) {
@@ -141,7 +141,7 @@
   // ── Fetch + render tasks ─────────────────────────────────────────────────
   async function loadTasks() {
     try {
-      const res   = await fetch('/api/tasks');
+      const res = await fetch('/api/tasks');
       const tasks = await res.json();
       renderTasks(tasks);
     } catch {
@@ -156,7 +156,7 @@
     if (!title) return;
 
     try {
-      const res  = await fetch('/api/tasks', {
+      const res = await fetch('/api/tasks', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ title }),
@@ -186,13 +186,13 @@
          * Expected Locus outcome: classifier=flakiness, action=retry-annotation.
          */
         setTimeout(() => { toast.hidden = false; }, 0);
-        setTimeout(() => { toast.hidden = true;  }, 2500);
+        setTimeout(() => { toast.hidden = true; }, 2500);
 
         // Re-render with updated task appended
         const tasks = Array.from(taskList.querySelectorAll('.task-item')).map((li) => ({
-          id:   parseInt(li.dataset.taskId, 10),
+          id: parseInt(li.dataset.taskId, 10),
           title: li.querySelector('.task-title').textContent,
-          done:  li.querySelector('.task-checkbox').checked,
+          done: li.querySelector('.task-checkbox').checked,
         }));
         tasks.push({ id: task.id, title: task.title, done: false });
         renderTasks(tasks);
@@ -228,8 +228,8 @@
   taskList.addEventListener('change', (e) => {
     const checkbox = e.target.closest('.task-checkbox');
     if (!checkbox) return;
-    const li       = checkbox.closest('.task-item');
-    const titleEl  = li.querySelector('.task-title');
+    const li = checkbox.closest('.task-item');
+    const titleEl = li.querySelector('.task-title');
     titleEl.classList.toggle('done', checkbox.checked);
 
     const allTasks = Array.from(taskList.querySelectorAll('.task-item')).map((el) => ({

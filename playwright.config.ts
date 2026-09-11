@@ -20,10 +20,11 @@ if (fs.existsSync(envPath)) {
 }
 
 process.env.CLASSIFIER_MODEL = process.env.CLASSIFIER_MODEL || 'gemini-2.5-flash-lite';
-process.env.RESOLVER_MODEL   = process.env.RESOLVER_MODEL   || 'gemini-2.5-flash-lite';
-process.env.HEAL_BUDGET       = process.env.HEAL_BUDGET       || '10';
-process.env.GCP_PROJECT_ID   = process.env.GCP_PROJECT_ID   || 'locus-dev-506512';
-process.env.GCP_REGION       = process.env.GCP_REGION       || 'us-central1';
+process.env.RESOLVER_MODEL = process.env.RESOLVER_MODEL || 'gemini-2.5-flash-lite';
+process.env.HEAL_BUDGET = process.env.HEAL_BUDGET || '10';
+process.env.GCP_PROJECT_ID = process.env.GCP_PROJECT_ID || 'locus-dev-506512';
+process.env.GCP_REGION = process.env.GCP_REGION || 'us-central1';
+process.env.GITHUB_RUN_ID = process.env.GITHUB_RUN_ID || `local-${Date.now()}`;
 
 export default defineConfig({
   testDir: './tests',
